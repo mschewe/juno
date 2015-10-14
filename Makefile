@@ -4,9 +4,9 @@ BIN_NAME=`basename ${GIT_REPO}`
 COMMIT_HASH=`git rev-parse --short HEAD 2>/dev/null`
 LDFLAGS=-ldflags "-X ${GIT_REPO}/version.CommitHash=${COMMIT_HASH}"
 
-all: gitinfo
+all: build
 
-gitinfo:
+build:
 	go build ${LDFLAGS} -o ${BIN_NAME} main.go
 
 run:
