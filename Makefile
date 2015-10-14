@@ -1,10 +1,24 @@
 GIT_REPO="github.com/mschewe/juno"
+BIN_NAME=`basename ${GIT_REPO}`
 
 COMMIT_HASH=`git rev-parse --short HEAD 2>/dev/null`
-BUILD_DATE=`date +%FT%T%z`
-LDFLAGS=-ldflags "-X ${GIT_REPO}/.main.Version=${COMMIT_HASH} -X ${GIT_REPO}/.main.BuildDate=${BUILD_DATE}"
+LDFLAGS=-ldflags "-X ${GIT_REPO}/version.CommitHash=${COMMIT_HASH}"
 
 all: gitinfo
 
 gitinfo:
-	go build ${LDFLAGS} -o
+	go build ${LDFLAGS} -o ${BIN_NAME} main.go
+
+run:
+	go run main.go
+
+run_build: all
+	./${BIN_NAME}
+
+clean:
+	rm -f ${BIN_NAME}
+
+init:
+	git init .
+	echo ${BIN_NAME} >> .gitignore
+	git commit -a -m "Initial commit"
