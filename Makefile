@@ -2,7 +2,7 @@ GIT_REPO=$(shell pwd | grep -oE 'github.com/.*?/.*?')
 BIN_NAME=$(shell basename ${GIT_REPO})
 COMMIT_HASH=$(shell git rev-parse --short HEAD 2>/dev/null)
 
-LDFLAGS=-ldflags "-X ${GIT_REPO}/version.CommitHash=${COMMIT_HASH}"
+LDFLAGS=-ldflags "-s -X ${GIT_REPO}/version.CommitHash=${COMMIT_HASH}"
 
 all: build
 
