@@ -26,4 +26,4 @@ init:
 	git init .
 	echo ${BIN_NAME} >> .gitignore
 	git add .
-	git commit -m "Initial commit"
+	git commit -m "make init"
