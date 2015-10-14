@@ -1,12 +1,16 @@
-GIT_REPO="github.com/mschewe/juno"
-BIN_NAME=`basename ${GIT_REPO}`
+GIT_REPO=$(shell pwd | grep -oE 'github.com/.*?/.*?')
+BIN_NAME=$(shell basename ${GIT_REPO})
+COMMIT_HASH=$(shell git rev-parse --short HEAD 2>/dev/null)
 
-COMMIT_HASH=`git rev-parse --short HEAD 2>/dev/null`
 LDFLAGS=-ldflags "-X ${GIT_REPO}/version.CommitHash=${COMMIT_HASH}"
 
 all: build
 
 build:
+	@echo "Building: ${GIT_REPO}"
+	@echo "Bin Name: ${BIN_NAME}"
+	@echo "Commit Hash: ${COMMIT_HASH}"
+	@echo
 	go build ${LDFLAGS} -o ${BIN_NAME} main.go
 
 run:
