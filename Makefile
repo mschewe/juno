@@ -21,4 +21,5 @@ clean:
 init:
 	git init .
 	echo ${BIN_NAME} >> .gitignore
-	git commit -a -m "Initial commit"
+	git add .
+	git commit -m "Initial commit"
